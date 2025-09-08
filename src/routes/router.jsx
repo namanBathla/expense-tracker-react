@@ -5,6 +5,7 @@ import Dashboard from "../pages/Dashboard";
 import Transactions from "../pages/Transactions";
 import NotFound from "../pages/NotFound";
 import Reports from "../pages/Reports";
+import Expenses from "../pages/Expenses";
 
 const router = createBrowserRouter([
     {
@@ -14,8 +15,9 @@ const router = createBrowserRouter([
             {index: true, element: <Home/>},
             {path: "dashboard", element: <Dashboard/>},
             {path: "transactions", element: <Transactions/>},
+            {path: "reports", element: <Reports/>},
+            {path: "expenses", element: <Expenses/>},
             {path: "*", element: <NotFound/>},
-            {path: "reports", element: <Reports/>}
         ]
     },
 ]
