@@ -1,16 +1,17 @@
 import React from 'react'
 import Transaction from '../components/Transaction'
 import db from "../firebase.js";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc , getDocs} from "firebase/firestore";
 
 const Transactions = () => {
 
   
-
-  async function getTransactions(db) {
+  async function getTransactions() {
     // access the collection from db, creates if not exists
-    const transactionsCol = collection(db, 'transactions');
-
+    const querySnapshot = await getDocs(collection(db, "transactions"));
+    querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+  });
   }
 
 
@@ -22,7 +23,7 @@ const Transactions = () => {
       type: "Debit",
       category: "Fixed Expense"
     });
-    alert("Transaction added Successfully");
+    console.log("Transaction added Successfully");
   }
 
 
@@ -30,6 +31,8 @@ const Transactions = () => {
     <div>
       <Transaction/>
       <button className="p-2 rounded-lg ml-10 bg-green-600" onClick={addTransaction}>Add Transaction</button>
+      <button className="p-2 rounded-lg ml-10 bg-green-600" onClick={getTransactions}>Get Trs</button>
+      
     </div>
   )
 }
