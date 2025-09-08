@@ -1,8 +1,19 @@
 import React from 'react'
+import Transaction from '../components/Transaction'
 
 const Transactions = () => {
   return (
-    <div>Transactions</div>
+    <div>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+      <Transaction/>
+    </div>
   )
 }
 
