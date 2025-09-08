@@ -4,8 +4,10 @@ import Navbar from '../components/Navbar.jsx';
 export default function Layout(){
     return (
         <>
-            <Navbar/>
-            <Outlet/>
+            <div className="flex">
+                <Navbar/>
+                <Outlet/>
+            </div>
         </>
     )
 }
