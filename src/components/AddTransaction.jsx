@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import db from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const AddTransaction = () => {
   // const [transaction, setTransaction] = useState({});
@@ -19,14 +20,8 @@ const AddTransaction = () => {
     setTransaction((prev) => ({ ...prev, [name]: value }));
   };
 
-  const addTransaction = async () => {
-    await addDoc(collection(db, "transactions"), {
-      amount: 10000,
-      description: "Sample Amount",
-      date: new Date(),
-      type: "Debit",
-      category: "Fixed Expense",
-    });
+  const addTransaction = async (finalTransaction) => {
+    await addDoc(collection(db, "transactions"), finalTransaction);
     console.log("Transaction added Successfully");
   };
 
@@ -40,6 +35,13 @@ const AddTransaction = () => {
       category: transaction.category || "General",
     };
     setTransaction(finalTransaction);
+    try {
+      addTransaction(finalTransaction);
+      console.log("Transaction logged successfully");
+    }
+    catch (error) {
+      console.log("Unable to log transaction");
+    }
     console.log(finalTransaction);
   };
 
@@ -51,16 +53,6 @@ const AddTransaction = () => {
         className="flex flex-col gap-4"
       >
         <input
-          type="date"
-          onChange={(e) => handleChange(e)}
-          name="date"
-          id=""
-          placeholder={new Date().toISOString().split("T")[0]}
-          className="border border-black p-2 rounded-lg"
-          value={transaction.date}
-          required
-        />
-        <input
           type="number"
           onChange={(e) => handleChange(e)}
           name="amount"
@@ -68,6 +60,16 @@ const AddTransaction = () => {
           placeholder="Amount"
           className="border border-black p-2 rounded-lg"
           value={transaction.amount}
+          required
+        />
+        <input
+          type="date"
+          onChange={(e) => handleChange(e)}
+          name="date"
+          id=""
+          placeholder={new Date().toISOString().split("T")[0]}
+          className="border border-black p-2 rounded-lg"
+          value={transaction.date}
           required
         />
         <input
@@ -104,9 +106,9 @@ const AddTransaction = () => {
             className="outline-none"
             value={transaction.category}
           >
-            <option value="" disabled selected>
+            {/* <option value="" disabled selected>
               Select Category
-            </option>
+            </option> */}
             <option value="Fixed">Fixed</option>
             <option value="Grocery">Grocery</option>
             <option value="Dairy">Dairy</option>
