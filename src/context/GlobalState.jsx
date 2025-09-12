@@ -1,9 +1,5 @@
 import React from 'react'
+import { createContext } from 'react'
 
-const GlobalState = () => {
-  return (
-    <div>GlobalState</div>
-  )
-}
 
-export default GlobalState
+export const GlobalState = createContext(transaction);

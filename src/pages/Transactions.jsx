@@ -1,7 +1,7 @@
 import React from 'react'
 import Transaction from '../components/Transaction'
 import db from "../firebase.js";
-import { collection, addDoc , getDocs} from "firebase/firestore";
+import { collection, addDoc , getDocs, doc, deleteDoc} from "firebase/firestore";
 import { useState } from 'react';
 
 const Transactions = () => {
@@ -50,13 +50,20 @@ const Transactions = () => {
     console.log("Transaction added Successfully");
   }
 
+  const deleteTransaction = async (id) => {
+    const docRef = doc(db, "transactions", id);
+    await deleteDoc(docRef);
+    console.log("Transaction deleted Successfully")
+    getTransactions();
+  }
+
 
   return (
     <div>
 
       <div className='flex flex-col gap-4'>
         {transactions.map((transaction => {
-        return <Transaction key={transaction.id} {...transaction}/>
+        return <Transaction key={transaction.id} {...transaction} onClickFunc={() => {deleteTransaction(transaction.id)}}/>
       }))}
 
       </div>
