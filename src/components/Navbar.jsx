@@ -13,6 +13,7 @@ const Navbar = () => {
       <NavLink to="/transactions" className={onActiveLink}>TRANSACTIONS</NavLink>
       <NavLink to="/reports" className={onActiveLink}>REPORTS</NavLink>
       <NavLink to="/expenses" className={onActiveLink}>EXPENSES</NavLink>
+      <NavLink to="/add">ADD</NavLink>
     </div>
   </>);
 };

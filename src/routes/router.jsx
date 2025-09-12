@@ -6,6 +6,7 @@ import Transactions from "../pages/Transactions";
 import NotFound from "../pages/NotFound";
 import Reports from "../pages/Reports";
 import Expenses from "../pages/Expenses";
+import AddTransaction from "../components/AddTransaction";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
             {path: "transactions", element: <Transactions/>},
             {path: "reports", element: <Reports/>},
             {path: "expenses", element: <Expenses/>},
+            {path: "add", element: <AddTransaction/>},
             {path: "*", element: <NotFound/>},
         ]
     },
