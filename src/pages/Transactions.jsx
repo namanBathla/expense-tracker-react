@@ -54,7 +54,8 @@ const Transactions = () => {
     const docRef = doc(db, "transactions", id);
     await deleteDoc(docRef);
     console.log("Transaction deleted Successfully")
-    getTransactions();
+    // getTransactions();
+    setTransactions(transactions.filter((t) => t.id != id));
   }
 
 
