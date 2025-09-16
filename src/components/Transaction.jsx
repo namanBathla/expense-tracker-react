@@ -2,9 +2,9 @@ import React from 'react'
 
 const Transaction = ({dateTime, amount, description, category, type, onClickFunc}) => {
 
-  const colorClass = type === "credit" ? "text-green-600" : "text-red-600";
+  const bgColor = type === "credit" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700";
   return (
-    <div className={`grid grid-cols-5 p-2 text-center ${colorClass}`}>
+    <div className={`grid grid-cols-5 p-2 text-center ${bgColor}`}>
       <div>{dateTime}</div>
       <div>{amount}</div>
       <div>{description}</div>
