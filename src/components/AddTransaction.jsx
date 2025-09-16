@@ -16,7 +16,6 @@ const AddTransaction = () => {
   const handleChange = (e) => {
     // this [name] attribute is from the <input> tag
     let { name, value } = e.target;
-    if (value === "") value = `Default ${name}`;
     setTransaction((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -38,6 +37,7 @@ const AddTransaction = () => {
     try {
       addTransaction(finalTransaction);
       console.log("Transaction logged successfully");
+      setTransaction({});
     }
     catch (error) {
       console.log("Unable to log transaction");
