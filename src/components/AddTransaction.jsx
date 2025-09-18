@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import db from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { TransactionContext } from "../context/TransactionsProvider";
 
 const AddTransaction = () => {
-  // const [transaction, setTransaction] = useState({});
   const initialState = {
     date: new Date().toISOString().split("T")[0],
     amount: "",
@@ -11,8 +11,13 @@ const AddTransaction = () => {
     type: "debit",              // set default so dropdown doesn’t break
     category: "Miscellaneous",  // set default if you want
   };
-
+  
   const [transaction, setTransaction] = useState(initialState);
+
+  const {addTransaction} = useContext(TransactionContext);
+
+
+  // const [transaction, setTransaction] = useState(initialState);
 
   const handleChange = (e) => {
     // this [name] attribute is from the <input> tag
@@ -20,10 +25,10 @@ const AddTransaction = () => {
     setTransaction((prev) => ({ ...prev, [name]: value }));
   };
 
-  const addTransaction = async (finalTransaction) => {
-    await addDoc(collection(db, "transactions"), finalTransaction);
-    console.log("Transaction added Successfully");
-  };
+  // const addTransaction = async (finalTransaction) => {
+  //   await addDoc(collection(db, "transactions"), finalTransaction);
+  //   console.log("Transaction added Successfully");
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
