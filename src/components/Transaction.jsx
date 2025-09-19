@@ -11,7 +11,6 @@ const Transaction = ({dateTime, amount, description, category, type, id}) => {
       <div>{amount}</div>
       <div>{description}</div>
       <div>{category}</div>
-      {/* <div className='text-red-600 cursor-pointer'>Delete</div> */}
       <button className='text-white bg-red-600 p-1 w-1/2 rounded-lg' onClick={() => deleteTransaction(id)}>Delete</button>
     </div>
   )
