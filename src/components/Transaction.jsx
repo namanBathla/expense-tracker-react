@@ -8,7 +8,7 @@ const Transaction = ({dateTime, amount, description, category, type, id}) => {
   return (
     <div className={`grid grid-cols-5 w-full p-2 text-center ${bgColor}`}>
       <div>{dateTime}</div>
-      <div>{amount}</div>
+      <div>{`₹${amount}`}</div>
       <div>{description}</div>
       <div>{category}</div>
       <button className='text-white bg-red-600 p-1 w-1/2 rounded-lg' onClick={() => deleteTransaction(id)}>Delete</button>

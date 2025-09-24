@@ -1,21 +1,19 @@
 import React, { useState, useContext } from "react";
-import db from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
 import { TransactionContext } from "../context/TransactionsProvider";
+import { Timestamp } from "firebase/firestore";
 
 const AddTransaction = () => {
   const initialState = {
     date: new Date().toISOString().split("T")[0],
     amount: "",
     description: "",
-    type: "debit",              // set default so dropdown doesn’t break
-    category: "Miscellaneous",  // set default if you want
+    type: "debit", // set default so dropdown doesn’t break
+    category: "Miscellaneous", // set default if you want
   };
-  
+
   const [transaction, setTransaction] = useState(initialState);
 
-  const {addTransaction} = useContext(TransactionContext);
-
+  const { addTransaction } = useContext(TransactionContext);
 
   // const [transaction, setTransaction] = useState(initialState);
 
@@ -33,7 +31,7 @@ const AddTransaction = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const finalTransaction = {
-      date: transaction.date || new Date().toISOString().split("T")[0],
+      date: Timestamp.fromDate(new Date(transaction.date)) || Timestamp.fromDate(new Date()),
       amount: transaction.amount,
       description:
         transaction.description || `Transaction on ${transaction.date}`,
@@ -43,8 +41,7 @@ const AddTransaction = () => {
     setTransaction(finalTransaction);
     try {
       addTransaction(finalTransaction);
-      console.log("Transaction logged successfully");
-      setTransaction(initialState);     // reset after new transaction is logged
+      setTransaction(initialState); // reset after new transaction is logged
 
     } catch (error) {
       console.log("Unable to log transaction");
