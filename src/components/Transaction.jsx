@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { TransactionContext } from '../context/TransactionsProvider';
 
-const Transaction = ({date, amount, description, category, type, id}) => {
+const Transaction = ({date, amount, description, category, type, id, showDelete = true}) => {
   const {deleteTransaction} = useContext(TransactionContext);
 
   const bgColor = type === "credit" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700";
@@ -11,7 +11,7 @@ const Transaction = ({date, amount, description, category, type, id}) => {
       <div>{`₹${amount}`}</div>
       <div>{description}</div>
       <div>{category}</div>
-      <button className='text-white bg-red-600 p-1 w-1/2 rounded-lg' onClick={() => deleteTransaction(id)}>Delete</button>
+      {showDelete && <button className='text-white bg-red-600 p-1 w-1/2 rounded-lg' onClick={() => deleteTransaction(id)}>Delete</button>}
     </div>
   )
 }
