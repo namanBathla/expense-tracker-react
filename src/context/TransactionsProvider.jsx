@@ -18,12 +18,12 @@ const TransactionsProvider = ({ children }) => {
     const data = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,
-        dateTime: doc.data().date.toDate().toLocaleDateString(),
+        date: doc.data().date.toDate(),
         ...doc.data(),
       };
     });
     setTransactions(data);
-    // console.log(typeof data[0].dateTime);
+    // console.log(typeof data[0].date);
   };
 
   /* Wrapping in () tells JavaScript: “This is a single expression, specifically an object literal.”

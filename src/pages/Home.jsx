@@ -7,9 +7,9 @@ const Home = () => {
   const getTotalMonthlyExpense = () => {
       let total = 0;
       transactions.forEach((transaction) => {
-        console.log("Check: ", new Date(transaction.dateTime));
-        if(transaction.type === "debit" && (new Date(transaction.dateTime)).getMonth() === (new Date().getMonth())) {
-          total += parseInt(transaction.amount);
+        console.log("Check: ", new Date(transaction.date.toDate()));
+        if(transaction.type === "debit" && (new Date(transaction.date.toDate()).getMonth()) === (new Date().getMonth())) {
+          total += transaction.amount;
         }
       });
       return total;
