@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, deleteDoc } from "firebase/firestore";
 import db from "../firebase";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createContext } from "react";
 import { getDocs } from "firebase/firestore";
 
@@ -18,12 +18,12 @@ const TransactionsProvider = ({ children }) => {
     const data = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,
-        dateTime: new Date(doc.data().date).toLocaleDateString(),
+        dateTime: doc.data().date.toDate().toLocaleDateString(),
         ...doc.data(),
       };
     });
     setTransactions(data);
-    console.log(data[0].dateTime);
+    // console.log(typeof data[0].dateTime);
   };
 
   /* Wrapping in () tells JavaScript: “This is a single expression, specifically an object literal.”
@@ -42,6 +42,8 @@ const TransactionsProvider = ({ children }) => {
     console.log("Transaction deleted Successfully");
     setTransactions(transactions.filter((t) => t.id != id));
   };
+
+  useEffect(() => {getTransactions()}, []);
 
   return (
     <TransactionContext.Provider

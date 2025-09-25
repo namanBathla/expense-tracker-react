@@ -28,25 +28,23 @@ const AddTransaction = () => {
   //   console.log("Transaction added Successfully");
   // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const finalTransaction = {
       date: Timestamp.fromDate(new Date(transaction.date)) || Timestamp.fromDate(new Date()),
-      amount: transaction.amount,
-      description:
-        transaction.description || `Transaction on ${transaction.date}`,
+      amount: Number(transaction.amount),
+      description: transaction.description || `Transaction on ${transaction.date}`,
       type: transaction.type || "debit",
       category: transaction.category || "General",
     };
-    setTransaction(finalTransaction);
+    // setTransaction(finalTransaction);    // causes extra re-render
     try {
-      addTransaction(finalTransaction);
+      await addTransaction(finalTransaction);
       setTransaction(initialState); // reset after new transaction is logged
-
+      console.log("Transaction added: ", finalTransaction);
     } catch (error) {
       console.log("Unable to log transaction");
     }
-    console.log(finalTransaction);
   };
 
   return (
