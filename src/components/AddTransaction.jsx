@@ -69,6 +69,7 @@ const AddTransaction = () => {
           onChange={(e) => handleChange(e)}
           name="date"
           id=""
+          max={new Date().toISOString().split("T")[0]}
           placeholder={new Date().toISOString().split("T")[0]}
           className="border border-black p-2 rounded-lg"
           value={transaction.date}
