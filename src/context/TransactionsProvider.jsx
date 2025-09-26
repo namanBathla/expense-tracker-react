@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, deleteDoc } from "firebase/firestore";
 import db from "../firebase";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { createContext } from "react";
 import { getDocs } from "firebase/firestore";
 
@@ -43,7 +43,19 @@ const TransactionsProvider = ({ children }) => {
     setTransactions(transactions.filter((t) => t.id != id));
   };
 
-  useEffect(() => {getTransactions()}, []);
+  const getPreviousFiveDates = () => {
+    let dates = [];
+    for(let i = 0; i < 5; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      dates.push(d);
+    }
+    return dates.reverse();
+  }
+
+  const previousFiveDates = useMemo(() => getPreviousFiveDates(), []);
+
+  useEffect(() => { getTransactions() }, []);
 
   return (
     <TransactionContext.Provider
@@ -53,6 +65,7 @@ const TransactionsProvider = ({ children }) => {
         deleteTransaction,
         setTransactions,
         getTransactions,
+        previousFiveDates,
       }}
     >
       {children}
