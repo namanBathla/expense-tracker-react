@@ -9,6 +9,7 @@ export const TransactionContext = createContext();
 const TransactionsProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
 
+  // some comment
   /* querySnapshot is not an array, it’s a QuerySnapshot object.
   So you can’t do querySnapshot.map(...).
   Instead, you need to map over its .docs array: */
