@@ -7,7 +7,7 @@ const Expense = ({date, amount, description, category, id, showDelete = true}) =
   "grid grid-cols-4 w-full p-2 text-center"
   return (
     <div className={gridClass}>
-      <div>{date.toDate().toLocaleDateString()}</div>
+      <div>{date.toLocaleDateString()}</div>
       <div>{`₹${amount}`}</div>
       <div>{description}</div>
       <div>{category}</div>

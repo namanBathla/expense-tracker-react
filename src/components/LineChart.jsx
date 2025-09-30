@@ -60,7 +60,7 @@ const LineChart = ({data}) => {
     }
   };
 
-  return <Line data={chartData} options={options} />;
+  return <Line className="" data={chartData} options={options} />;
 };
 
 export default LineChart;

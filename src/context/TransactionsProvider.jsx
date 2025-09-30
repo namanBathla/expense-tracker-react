@@ -16,12 +16,14 @@ const TransactionsProvider = ({ children }) => {
   const getTransactions = async () => {
     const querySnapshot = await getDocs(collection(db, "transactions"));
     const data = querySnapshot.docs.map((doc) => {
+      const raw = doc.data();
       return {
         id: doc.id,
-        date: doc.data().date.toDate(),
-        ...doc.data(),
+        ...raw,
+        date: raw.date.toDate(),
       };
     });
+    data.sort((a,b) => a.date > b.date);
     setTransactions(data);
     // console.log(typeof data[0].date);
   };
