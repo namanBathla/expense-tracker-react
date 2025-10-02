@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import {TransactionContext} from '../context/TransactionsProvider'
 import Expense from '../components/Expense';
 import LineChart from '../components/LineChart';
@@ -6,6 +6,7 @@ import LineChart from '../components/LineChart';
 const Home = () => {
   const {transactions} = useContext(TransactionContext);
 
+  // ---------------------- Functions ------------------------------------------------
   const isExpense = (t) => t.type === "debit";
   
   // function to get total expense of last 5 days
@@ -43,6 +44,7 @@ const Home = () => {
     return dailyExpenses;
   }
 
+
   // function to get total expense by Month
   const getMonthlyExpenses = () => {
       const monthlyExpenses = {};
@@ -60,8 +62,8 @@ const Home = () => {
         console.log(i);
         i++;
       }
-      console.log("Start Month:", startDate);
-      console.log("End Month:", endDate);
+      // console.log("Start Month:", startDate);
+      // console.log("End Month:", endDate);
 
       const expensesInMonthRange = transactions.filter((t) => {
         const tDate = t.date;
@@ -73,7 +75,8 @@ const Home = () => {
         const amountToAdd = e.amount;
         monthlyExpenses[monthKey] += amountToAdd;
       });
-      console.log(monthlyExpenses);
+      // console.log(monthlyExpenses);
+      return monthlyExpenses;
   }
 
   const getCurrentMonthTotal = () => {
@@ -91,9 +94,13 @@ const Home = () => {
     }
 
 
-    const currentMonthTotal = getCurrentMonthTotal();
+    // ----------------------------------------------------------------------------------------------
+
+    // update the current month total only when transactions changes
+    const currentMonthTotal = useMemo(() => getCurrentMonthTotal(), [transactions]);
     const recentTransactions = transactions.slice(0,5);   // most recent five transactions
-    const dailyExpenses = getDailyExpenses();
+    const dayWiseExpenses = useMemo(() => getDailyExpenses(), [transactions]);
+    const monthWiseExpenses = useMemo(() => getMonthlyExpenses(), [transactions]);
 
 
   return (
@@ -109,9 +116,11 @@ const Home = () => {
       <div className='col-span-2 row-span-1 bg-blue-300 rounded-lg p-2'>+ Add transaction +</div>
       <div className='col-span-2 row-span-1 bg-blue-300 rounded-lg p-2'>Some Feature</div>
       <div className='col-span-3 row-span-2  rounded-lg'>
-        <LineChart className="" data={dailyExpenses}/>
+        <LineChart className="" data={dayWiseExpenses} title="Expenses over last 5 days"/>
       </div>
-      <div className='col-span-3 row-span-2 bg-gray-500 rounded-lg p-2'>Monthly expense of last 5 months</div>
+      <div className='col-span-3 row-span-2 rounded-lg p-2'>
+        <LineChart data={monthWiseExpenses} title="Expenses over last 5 months"/>
+      </div>
     </div>
   )
 }

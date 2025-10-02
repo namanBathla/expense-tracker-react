@@ -24,7 +24,13 @@ const TransactionsProvider = ({ children }) => {
         date: raw.date.toDate(),
       };
     });
-    data.sort((a,b) => a.date > b.date);
+
+    // The comparator (a, b) => … should return:
+    // Negative number (< 0) → a comes before b
+    // Zero (0) → a and b are treated equal
+    // Positive number (> 0) → a comes after b
+    
+    data.sort((a,b) => b.date - a.date);
     setTransactions(data);
     // console.log(typeof data[0].date);
   };
