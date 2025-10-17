@@ -18,6 +18,7 @@ const TransactionsProvider = ({ children }) => {
     const querySnapshot = await getDocs(collection(db, "transactions"));
     const data = querySnapshot.docs.map((doc) => {
       const raw = doc.data();
+      console.log("fetching data");
       return {
         id: doc.id,
         ...raw,
@@ -33,6 +34,7 @@ const TransactionsProvider = ({ children }) => {
     data.sort((a,b) => b.date - a.date);
     setTransactions(data);
     // console.log(typeof data[0].date);
+    // return data;
   };
 
   /* Wrapping in () tells JavaScript: “This is a single expression, specifically an object literal.”
