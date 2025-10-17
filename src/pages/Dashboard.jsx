@@ -97,17 +97,13 @@ const Dashboard = () => {
     const currentMonthTotal = useMemo(() => getCurrentMonthTotal(), [transactions]);
     const dayWiseExpenses = useMemo(() => getDailyExpenses(), [transactions]);
     const monthWiseExpenses = useMemo(() => getMonthlyExpenses(), [transactions]);
-    const recentTransactions = transactions.slice(0,5);   // most recent five transactions
+    
 
   return (
   <>
   <div className='w-screen'>
     <div className="grid grid-cols-5">
       <div className='col-span-1 justify-self-center self-center'>Current month total: {currentMonthTotal}</div>
-      <div className='col-span-4 bg-gray-500 rounded-lg p-2'>
-          <h3 className='justify-self-center'>Last 5 transactions</h3>
-          {recentTransactions.map((t) => <Expense key={t.id} {...t} showDelete={false} />)}
-      </div>
     </div>
 
 
