@@ -47,6 +47,7 @@ const Home = () => {
 
   // function to get total expense by Month
   const getMonthlyExpenses = () => {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const monthlyExpenses = {};
       const now = new Date();
 
@@ -58,7 +59,7 @@ const Home = () => {
 
       let i = startDate.getMonth();
       while(i <= endDate.getMonth()) {
-        monthlyExpenses[i] = 0;
+        monthlyExpenses[months[i]] = 0;
         console.log(i);
         i++;
       }
@@ -73,7 +74,7 @@ const Home = () => {
       expensesInMonthRange.forEach((e) => {
         const monthKey = e.date.getMonth();
         const amountToAdd = e.amount;
-        monthlyExpenses[monthKey] += amountToAdd;
+        monthlyExpenses[months[monthKey]] += amountToAdd;
       });
       // console.log(monthlyExpenses);
       return monthlyExpenses;
