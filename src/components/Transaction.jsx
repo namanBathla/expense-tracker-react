@@ -1,19 +1,52 @@
-import React, { useContext } from 'react'
-import { TransactionContext } from '../context/TransactionsProvider';
+import React, { useContext } from "react";
+import { TransactionContext } from "../context/TransactionsProvider";
+import { MdDeleteOutline } from "react-icons/md";
 
-const Transaction = ({date, amount, description, category, type, id, showDelete = true}) => {
-  const {deleteTransaction} = useContext(TransactionContext);
+const Transaction = ({
+  date,
+  amount,
+  description,
+  category,
+  type,
+  id,
+  showDelete = true,
+}) => {
+  const { deleteTransaction } = useContext(TransactionContext);
 
-  const bgColor = type === "credit" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700";
+  const textColor =
+    type === "credit"
+      ? "text-green-700"
+      : "text-red-700";
   return (
-    <div className={`grid grid-cols-5 w-full p-2 text-center ${bgColor}`}>
-      <div>{date.toLocaleDateString()}</div>
-      <div>{`₹${amount}`}</div>
-      <div>{description}</div>
-      <div>{category}</div>
-      {showDelete && <button className='text-white bg-red-600 p-1 w-1/2 rounded-lg' onClick={() => deleteTransaction(id)}>Delete</button>}
+    <div className={`transaction-box w-full ${textColor} p-4 rounded-2xl shadow-md bg-white `}>
+      <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-center items-center">
+        <div>
+          <span className="sm:hidden inline text-black">Date: </span>
+          {date.toLocaleDateString()}
+        </div>
+        <div>
+          <span className="sm:hidden inline text-black">Amt: </span>
+          {`₹${amount}`}
+        </div>
+        <div>
+          <span className="sm:hidden inline text-black">Desc: </span>
+          {description}
+        </div>
+        <div>
+          <span className="sm:hidden inline text-black">Catg: </span>
+          {category}
+        </div>
+        {showDelete && (
+          <button
+            className="text-red-700 w-10 h-8 rounded-lg flex justify-center items-center mx-auto sm:mx-0"
+            onClick={() => deleteTransaction(id)}
+          >
+            <MdDeleteOutline className="w-5 h-5" />
+          </button>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Transaction;
