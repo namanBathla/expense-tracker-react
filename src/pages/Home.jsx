@@ -10,18 +10,20 @@ const Home = () => {
   const recentTransactions = transactions.slice(0, 5); // most recent five transactions
 
   return (
-    <div className="parent flex flex-col bg-blue-100">
-      <div className="box flex flex-col gap-10 justify-center items-center h-screen p-4">
+    <div className="parent flex flex-col bg-slate-50 text-slate-800 scroll-smooth">
+      <div className="box flex flex-col gap-8 justify-center items-center min-h-screen p-6">
         {/* title and taglin */}
         <div className="flex flex-col justify-center items-center">
-          <h1 className="text-6xl font-bold text-center">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-2">
             Expense Tracker App
           </h1>
-          <span className="text-xl">Track Smarter. Spend Better.</span>
+          <span className="text-lg md:text-xl text-slate-600">
+            Track Smarter. Spend Better.
+          </span>
         </div>
 
         {/* Description */}
-        <div className="description w-3/4">
+        <div className="description w-3/4 max-w-2xl leading-relaxed text-slate-600 text-center">
           Stay on top of your finances with real-time insights into your income
           and expenses. Visualize your spending habits, set goals, and take
           control of your money effortlessly.Easily add, view, and analyze your
@@ -30,16 +32,19 @@ const Home = () => {
         </div>
 
         {/* Quick access buttons */}
-        <div className="buttons flex gap-3">
+        <div className="buttons flex gap-3 justify-center mt-4">
           <Link
             to="menu"
             smooth={true}
             duration={500}
-            className="bg-blue-400 p-3 rounded-lg cursor-pointer"
+            className="bg-blue-600 px-6 py-3 rounded-lg cursor-pointer text-white font-medium shadow-md hover:bg-blue-700 transition"
           >
-            Get Started{" "}
+            Get Started
           </Link>
-          <NavLink className="border border-black p-3 rounded-lg" to="/add">
+          <NavLink
+            className="px-6 py-3 rounded-lg border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition"
+            to="/add"
+          >
             Add Transaction
           </NavLink>
         </div>
@@ -47,30 +52,53 @@ const Home = () => {
 
       <div
         id="menu"
-        className="box flex flex-col gap-10 justify-center items-center py-10 p-4"
+        className="box flex flex-col gap-6 justify-center items-center py-20 bg-white shadow-inner min-h-screen"
       >
-        <NavLink to="/dashboard" className="border border-black w-1/4 text-center p-3 hover:bg-blue-200 rounded-lg">Monthly Summary</NavLink>
-        <NavLink to="/reports" className="border border-black w-1/4 text-center p-3 hover:bg-blue-200 rounded-lg">View Insights</NavLink>
-        <NavLink to="/reports" className="border border-black w-1/4 text-center p-3 hover:bg-blue-200 rounded-lg">Trends</NavLink>
+        <NavLink
+          to="/dashboard"
+          className="w-64 text-center px-6 py-3 rounded-lg border border-slate-300 hover:bg-blue-100 hover:border-blue-400 transition"
+        >
+          Monthly Summary
+        </NavLink>
+        <NavLink
+          to="/reports"
+          className="w-64 text-center px-6 py-3 rounded-lg border border-slate-300 hover:bg-blue-100 hover:border-blue-400 transition"
+        >
+          View Insights
+        </NavLink>
+        <NavLink
+          to="/reports"
+          className="w-64 text-center px-6 py-3 rounded-lg border border-slate-300 hover:bg-blue-100 hover:border-blue-400 transition"
+        >
+          Trends
+        </NavLink>
       </div>
 
-      <div className="box bg-green-300 flex flex-col gap-2 items-center h-screen p-4">
-        <h3 className="text-lg font-bold">Recent Transactions</h3>
-        <div className="transactions-box w-full">
-          <div className="table-headers font-bold grid grid-cols-4 p-2 text-center">
-            <div>Date</div>
-            <div>Amount</div>
-            <div>Description</div>
-            <div>Category</div>
+      <div className="box flex flex-col gap-4 items-center min-h-screen bg-py-16 px-6 rounded-2xl shadow-md">
+        <div className="bg-white rounded-2xl shadow-lg p-8 w-full flex flex-col">
+          <h3 className="text-2xl font-semibold text-blue-700 mb-4 text-center">
+            Recent Transactions
+          </h3>
+          <div className="transactions-box w-full border-t border-slate-200 overflow-x-auto">
+            <div className="min-w-[500px]">
+              <div className="table-headers font-semibold grid grid-cols-4 p-3 bg-blue-50 text-slate-700 rounded-t-lg text-center">
+                <div>Date</div>
+                <div>Amount</div>
+                <div>Description</div>
+                <div>Category</div>
+              </div>
+              {recentTransactions.map((t) => (
+                <Expense key={t.id} {...t} showDelete={false} />
+              ))}
+            </div>
           </div>
-          {recentTransactions.map((t) => (
-            <Expense key={t.id} {...t} showDelete={false} />
-          ))}
+          <NavLink
+            to="/transactions"
+            className="mt-4 text-blue-600 hover:underline self-end font-medium"
+          >
+            View all Transactions
+          </NavLink>
         </div>
-        <NavLink className="self-start hover:underline" to="/transactions">
-          View all Transactions
-        </NavLink>
-        {/* </div> */}
       </div>
     </div>
   );

@@ -7,13 +7,12 @@ const Dashboard = () => {
   const { transactions } = useContext(TransactionContext);
   const isExpense = (t) => t.type === "debit";
 
-  // function to get total expense of last 5 days
+  // function to get total expense of last {days} days
   const getDailyExpenses = (days) => {
     // days is the no. of days to get the transaction of, e.g. last 5 days, last 30 days
     const dailyExpenses = {};
 
     const endDate = new Date();
-    // console.log("endDate:", endDate.toISOString().split("T")[0]);
     endDate.setUTCHours(23, 59, 59, 999); // end of endDate, using UTC fixes the issue of date
 
     const startDate = new Date();

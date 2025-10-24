@@ -8,7 +8,9 @@ export default function Layout(){
             <TransactionsProvider>
             <div className="flex">
                 <Navbar/>
-                <Outlet/>
+                <div className="max-w-4xl mx-auto p-6 ml-64">
+                    <Outlet/>
+                </div>
             </div>
             </TransactionsProvider>
         </>

@@ -3,11 +3,16 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
 
   const onActiveLink = ({isActive}) => {
-    return isActive ? "text-red-900" : "text-white";
+    // return isActive ? "text-blue-400" : "text-white";
+    // return isActive ? "bg-slate-700 px-3 py-2 rounded-md text-white" : "text-white";
+
+    return isActive
+  ? "bg-slate-700 px-3 py-2 rounded-md text-white transition-colors duration-300"
+  : "text-white px-3 py-2 transition-colors duration-300";
   }
 
   return (<>
-    <div className="flex flex-col justify-center items-center gap-5 bg-slate-400 h-screen px-5">
+    <div className="fixed left-0 top-0 flex flex-col justify-center items-center gap-5 bg-slate-800 text-white h-screen px-5">
       <NavLink to="/" className={onActiveLink}>HOME</NavLink>
       <NavLink to="/dashboard" className={onActiveLink}>DASHBOARD</NavLink>
       <NavLink to="/transactions" className={onActiveLink}>TRANSACTIONS</NavLink>
