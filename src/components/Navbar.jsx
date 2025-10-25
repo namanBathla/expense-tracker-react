@@ -34,7 +34,7 @@ const Navbar = () => {
         const Icon = link.icon;
         return (
           <NavLink key={link.name} to={link.path} className={onActiveLink}>
-            <div className="flex">
+            <div className="flex justify-center items-center">
               <Icon className="h-5 w-5 mr-2"/>
               {link.name}
             </div>

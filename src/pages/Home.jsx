@@ -50,10 +50,14 @@ const Home = () => {
         </div>
       </div>
 
+      {/* MENU */}
       <div
         id="menu"
-        className="box flex flex-col gap-6 justify-center items-center py-20 bg-white shadow-inner min-h-screen"
-      >
+        className="box flex flex-col gap-6 justify-center items-center px-6 bg-white shadow-inner min-h-screen"
+      > 
+      <h3 className="text-2xl font-semibold text-blue-700 text-center">
+            Menu
+          </h3>
         <NavLink
           to="/dashboard"
           className="w-64 text-center px-6 py-3 rounded-lg border border-slate-300 hover:bg-blue-100 hover:border-blue-400 transition"
@@ -74,7 +78,7 @@ const Home = () => {
         </NavLink>
       </div>
 
-      <div className="box flex flex-col gap-4 items-center min-h-screen bg-py-16 px-6 rounded-2xl shadow-md">
+      <div className="box flex flex-col gap-6 items-center min-h-screen px-6 rounded-2xl">
         <div className="bg-white rounded-2xl shadow-lg p-8 w-full flex flex-col">
           <h3 className="text-2xl font-semibold text-blue-700 mb-4 text-center">
             Recent Transactions

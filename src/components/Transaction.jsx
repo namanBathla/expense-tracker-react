@@ -2,23 +2,14 @@ import React, { useContext } from "react";
 import { TransactionContext } from "../context/TransactionsProvider";
 import { MdDeleteOutline } from "react-icons/md";
 
-const Transaction = ({
-  date,
-  amount,
-  description,
-  category,
-  type,
-  id,
-  showDelete = true,
-}) => {
+const Transaction = ({date,amount,description,category,type,id,showDelete = true, blackText}) => {
   const { deleteTransaction } = useContext(TransactionContext);
+  const isExpense = () =>type === "debit";
 
-  const textColor =
-    type === "credit"
-      ? "text-green-700"
-      : "text-red-700";
+  const textColor = blackText ? "text-gray-900" : (type === "credit" ? "text-green-700" : "text-red-700");
+
   return (
-    <div className={`transaction-box w-full ${textColor} p-4 rounded-2xl shadow-md bg-white `}>
+    <div className={`transaction-box w-full ${textColor} p-3 rounded-2xl shadow-md bg-white `}>
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-center items-center">
         <div>
           <span className="sm:hidden inline text-black">Date: </span>

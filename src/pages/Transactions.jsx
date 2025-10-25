@@ -21,7 +21,7 @@ const Transactions = () => {
         <div>Category</div>
         <div></div>
       </div>
-      <div className='flex flex flex-col gap-3'>
+      <div className='flex flex-col gap-3'>
         {transactions.map((transaction => {
         return <Transaction key={transaction.id} {...transaction}/>
       }))}
