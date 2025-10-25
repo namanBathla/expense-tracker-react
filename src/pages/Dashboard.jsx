@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from "react";
 import { TransactionContext } from "../context/TransactionsProvider";
 import LineChart from "../components/LineChart";
-import Expense from "../components/Expense";
+import { FaWallet } from "react-icons/fa";
 
 const Dashboard = () => {
   const { transactions } = useContext(TransactionContext);
@@ -125,30 +125,52 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="w-screen">
-        <div className="">
-          <div className="col-span-1 justify-self-center self-center">
-            Current month total: {currentMonthTotal}
+      <div className="main-page-container flex flex-col gap-10 px-6 py-8 bg-slate-50 min-h-screen">
+        <div className="heading flex flex-col mb-4">
+          <h2 className="text-2xl font-semibold text-blue-700 text-center sm:text-left">
+            Dashboard
+          </h2>
+          <p className="text-slate-600">Your spending overview at a glance.</p>
+        </div>
+
+        <div className="flex justify-center">
+          <div className="border bg-white border-slate-200 px-6 py-4 shadow-md rounded-lg flex gap-4 max-w-md w-full">
+            <div className="bg-blue-100 text-blue-700 p-3 rounded-full">
+              <FaWallet className="w-6 h-6 text-blue-600" />
+            </div>
+            <div>
+              <h3 className="font-medium text-slate-600 max-w-md w-full text-sm">
+                Current Month Total
+              </h3>
+              <p className="text-2xl font-semibold text-blue-700">
+                ₹{currentMonthTotal}
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-lg w-11/12">
+        {/* Chart 1 */}
+        <div className="chart-container py-4 px-6 bg-white shadow-md border border-slate-200 rounded-lg">
+          <h3 className="flex justify-center w-full font-semibold text-slate-600">Expenses over last 5 Days</h3>
           <LineChart
             className=""
             data={dayWiseExpenses}
-            title="Expenses over last 5 days"
           />
         </div>
-        <div className="rounded-lg w-11/12">
+
+        {/* Chart 2 */}
+        <div className="chart-container py-4 px-6 bg-white shadow-md border border-slate-200 rounded-lg">
+          <h3 className="flex justify-center w-full font-semibold text-slate-600">Expenses over last 5 Months</h3>
           <LineChart
             data={monthWiseExpenses}
-            title="Expenses over last 5 months"
           />
         </div>
-        <div className="rounded-lg p-2 w-11/12">
+
+        {/* Chart 3 */}
+        <div className="chart-container py-4 px-6 bg-white shadow-md border border-slate-200 rounded-lg">
+          <h3 className="flex justify-center w-full font-semibold text-slate-600">Expenses over last 30 days</h3>
           <LineChart
             data={dayWiseExpenseoOfLastMonth}
-            title="Expenses over last 30 days"
           />
         </div>
       </div>

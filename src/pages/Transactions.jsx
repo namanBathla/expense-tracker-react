@@ -9,7 +9,7 @@ const Transactions = () => {
   useEffect(() => {getTransactions()}, []);
 
   return (
-    <div className='flex flex-col gap-4 px-6 py-8 bg-slate-50 min-h-screen'>
+    <div className='main-page-container flex flex-col gap-4 px-6 py-8 bg-slate-50 min-h-screen'>
 
       <h2 className="text-2xl font-semibold text-blue-700 mb-4 text-center sm:text-left">
         All Transactions

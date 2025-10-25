@@ -7,10 +7,11 @@ const Transaction = ({date,amount,description,category,type,id,showDelete = true
   const isExpense = () =>type === "debit";
 
   const textColor = blackText ? "text-gray-900" : (type === "credit" ? "text-green-700" : "text-red-700");
-
+  const gridCols = showDelete ? "sm:grid-cols-5" : "sm:grid-cols-4";
+  
   return (
-    <div className={`transaction-box w-full ${textColor} p-3 rounded-2xl shadow-md bg-white `}>
-      <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-center items-center">
+    <div className={`transaction-box w-full ${textColor} p-3 rounded-2xl shadow-md bg-white`}>
+      <div className={`grid grid-cols-1 ${gridCols} gap-2 text-center items-center`}>
         <div>
           <span className="sm:hidden inline text-black">Date: </span>
           {date.toLocaleDateString()}
