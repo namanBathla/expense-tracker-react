@@ -74,7 +74,7 @@ const Dashboard = () => {
     let i = startDate.getMonth();
     while (i <= endDate.getMonth()) {
       monthlyExpenses[months[i]] = 0;
-      console.log(i);
+      // console.log(i);
       i++;
     }
     // console.log("Start Month:", startDate);
@@ -98,7 +98,7 @@ const Dashboard = () => {
     let total = 0;
     transactions.forEach((t) => {
       // console.log("Check: ", new Date(transaction.date));
-      console.log(t.date);
+      // console.log(t.date);
       if (
         isExpense(t) &&
         new Date(t.date).getMonth() === new Date().getMonth()
