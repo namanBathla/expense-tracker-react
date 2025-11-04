@@ -155,6 +155,7 @@ const Dashboard = () => {
           <LineChart
             className=""
             data={dayWiseExpenses}
+            text="Date"
           />
         </div>
 
@@ -163,6 +164,7 @@ const Dashboard = () => {
           <h3 className="flex justify-center w-full font-semibold text-slate-600">Expenses over last 5 Months</h3>
           <LineChart
             data={monthWiseExpenses}
+            text="Month"
           />
         </div>
 
@@ -171,6 +173,7 @@ const Dashboard = () => {
           <h3 className="flex justify-center w-full font-semibold text-slate-600">Expenses over last 30 days</h3>
           <LineChart
             data={dayWiseExpenseoOfLastMonth}
+            text="Date"
           />
         </div>
       </div>

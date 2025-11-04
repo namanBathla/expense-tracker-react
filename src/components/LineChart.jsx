@@ -28,7 +28,7 @@ ChartJS.register(
   ChartDataLabels
 );
 
-const LineChart = ({ data}) => {
+const LineChart = ({ data, text}) => {
   const labels = Object.keys(data);
   const amounts = Object.values(data);
 
@@ -72,7 +72,7 @@ const LineChart = ({ data}) => {
       x: {
         title: {
           display: true,
-          text: "Date",
+          text: text,
         },
       },
       y: {
